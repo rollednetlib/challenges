@@ -6,11 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main()
+char* getCreds()
 {
 	char *inputPass;
 	char inputUsername[100];
-	char shadowString[200];
+	static char shadowString[200]; // = malloc(200);
+	// Allocate string on the heap
 
 	printf("Enter username: ");
 	scanf(" %s", inputUsername);
@@ -21,12 +22,17 @@ int main()
 	printf("%s\n",inputUsername);
 
 	strcpy(shadowString, inputUsername);
+	strcat(shadowString, ":");
 	strcat(shadowString, inputPass);
-
-
-
 
 	
 	printf("%s\n", shadowString);
-	exit(0);
+	return shadowString;
+}
+
+int main()
+{
+//	char creds = getCreds();
+	printf("REturned string: %s\n", getCreds());
+	return 0;
 }
