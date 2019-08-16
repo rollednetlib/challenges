@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <math.h>
+#include <fenv.h>
 
 int main()
 {
@@ -8,7 +10,10 @@ int main()
 	printf("What is the exchange rate? ");
 	scanf(" %f", &exchangeRate);
 
-	usd = euros * exchangeRate;
-	printf("%f euros at an echange rate of %f is\n%f U.S. dollars.\n", euros, exchangeRate, usd);
+	usd = roundf(euros * exchangeRate * 100) / 100;
+	/* Use multiply euro exchange result by 100 
+	 * so roundf rounds the last 2 decimal places only.
+	 */
+	printf("%f euros at an echange rate of %f is\n%.2f U.S. dollars.\n", euros, exchangeRate, usd);
 	return 0;
 }
